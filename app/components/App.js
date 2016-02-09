@@ -11,7 +11,7 @@ class App extends React.Component {
     // const post = Post.post;
     return (
       <div>
-        <h1>There will be something here, I promise!</h1>
+        <h1>Welcome to ScratchBlog, a blog made from scratch!</h1>
         <Post />
       </div>
     );

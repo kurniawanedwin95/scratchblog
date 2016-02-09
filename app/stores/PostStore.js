@@ -13,7 +13,12 @@ class PostStore extends BaseStore {
     switch (action.action) {
       case 'CREATE_POST':
         console.log(action);
-        this.create(action.id, action.input);
+        this.create(action.id, action.text);
+        this.emitChange();
+        break;
+      case 'DELETE_POST':
+        console.log(action);
+        this.delete(action.id);
         this.emitChange();
         break;
 
@@ -21,14 +26,21 @@ class PostStore extends BaseStore {
     }
   }
 
-  create(id, input) {
-    console.log(input);
+  create(id, text) {
     const post = {
       id,
-      text: input,
+      text,
     };
     this.posts.push(post);
     return post;
+  }
+
+  delete(id) {
+    this.posts.map((post, index) => {
+      if (post.id === id) {
+        this.posts.splice(index, 1);
+      }
+    });
   }
 }
 

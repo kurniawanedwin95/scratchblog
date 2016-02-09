@@ -1,6 +1,7 @@
 import React from 'react';
 import PostActions from '../actions/PostActions.js';
 import PostStore from '../stores/PostStore.js';
+import Comment from './Comment.js';
 
 class Post extends React.Component {
   constructor(props) {
@@ -24,17 +25,15 @@ class Post extends React.Component {
   }
 
   addPost() {
-    const input = document.getElementById('input').value;
-    PostActions.create(input);
+    const postinput = document.getElementById('postinput').value;
+    PostActions.create(postinput);
   }
 
-  deletePost() {
-    console.log('imma delete');
-    return;
+  deletePost(id) {
+    PostActions.delete(id);
   }
 
   render() {
-    // WE'RE GONNA DO A MAP/FOREACH AND RENDER ALL THE POST OF POSTS!
     const posts = PostStore.posts;
     const renderPost = [];
     console.log(this.state.posts);
@@ -42,8 +41,11 @@ class Post extends React.Component {
       renderPost.push(
         <li className="post" key={post.id}>
           {post.text}
-          <div className="author"> by Edwin </div>
-          <button onClick={this.deletePost}>Remove post</button>
+          <div className="author">by Edwin</div>
+          <Comment
+            postId={post.id}
+          />
+          <button onClick={this.deletePost.bind(this, post.id)}>Remove post</button>
         </li>
       );
     });
@@ -51,7 +53,7 @@ class Post extends React.Component {
       <div>
         {renderPost}
         <br></br>
-        <textarea id = "input" rows="7" cols="75">
+        <textarea id="postinput" rows="7" cols="75">
         </textarea>
         <button onClick={this.addPost}>Post!</button>
       </div>
