@@ -12,7 +12,12 @@ class CommentStore extends BaseStore {
     switch (action.action) {
       case 'CREATE_COMMENT':
         console.log(action);
-        this.create(action.postId, action.id, action.text);
+        this.create(action.postId, action.id, action.text, action.time);
+        this.emitChange();
+        break;
+      case 'DELETE_COMMENT':
+        console.log(action);
+        this.delete(action.id);
         this.emitChange();
         break;
 
@@ -20,14 +25,23 @@ class CommentStore extends BaseStore {
     }
   }
 
-  create(postId, id, text) {
+  create(postId, id, text, time) {
     const comment = {
       postId,
       id,
       text,
+      time,
     };
     this.comments.push(comment);
     return comment;
+  }
+
+  delete(id) {
+    this.comments.map((comment, index) => {
+      if (comment.id === id) {
+        this.comments.splice(index, 1);
+      }
+    });
   }
 
 

@@ -24,8 +24,14 @@ class Comment extends React.Component {
   }
 
   addComment(postId) {
+    const t = new Date();
+    const time = t.toString();
     const commentinput = document.getElementById(postId).value;
-    CommentActions.create(postId, commentinput);
+    CommentActions.create(postId, commentinput, time);
+  }
+
+  deleteComment(id) {
+    CommentActions.delete(id);
   }
 
   render() {
@@ -39,19 +45,26 @@ class Comment extends React.Component {
         renderComments.push(
           <li className="comment" key={comment.id}>
             <br></br>
-            Author: anonymous
-            <br></br>
+            <div className="comment-author-time">
+              <div className="comment-delete"
+                onClick={this.deleteComment.bind(this, comment.id)}
+              >x</div>
+              Author: anonymous, {comment.time}
+            </div>
             {comment.text}
           </li>
         );
       }
     });
     return (
-      <div className="comment">
-        Comments:
+      <div className="comment-box">
         {renderComments}
-        <textarea id={postId} rows="3" cols="30">
-        </textarea>
+        <div className="comment-textarea">
+          <br></br>
+          <div>Write your comment:</div>
+          <textarea id={postId} rows="3" cols="30">
+          </textarea>
+        </div>
         <br></br>
         <button className="add-comment" onClick={this.addComment.bind(this, postId)}>
           Add comment

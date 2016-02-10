@@ -3,11 +3,13 @@ import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import BlogConstants from '../constants/BlogConstants.js';
 
 class PostActions {
-  create(input) {
+  create(title, input, time) {
     AppDispatcher.dispatch({
       action: BlogConstants.CREATE_POST,
       id: uuid.v4(),
+      title,
       text: input,
+      time,
     });
   }
 

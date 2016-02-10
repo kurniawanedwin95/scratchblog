@@ -25,8 +25,11 @@ class Post extends React.Component {
   }
 
   addPost() {
-    const postinput = document.getElementById('postinput').value;
-    PostActions.create(postinput);
+    const t = new Date();
+    const time = t.toString();
+    const postTitle = document.getElementById('post-title').value;
+    const postInput = document.getElementById('post-input').value;
+    PostActions.create(postTitle, postInput, time);
   }
 
   deletePost(id) {
@@ -40,11 +43,17 @@ class Post extends React.Component {
     posts.forEach(post => {
       renderPost.push(
         <li className="post" key={post.id}>
+          <div className="post-title">{post.title}</div>
+          <br></br>
           {post.text}
-          <div className="author">by Edwin</div>
-          <Comment
-            postId={post.id}
-          />
+          <div className="post-author-time">
+            Author: Edwin, {post.time}
+          </div>
+          <ul>
+            <Comment
+              postId={post.id}
+            />
+          </ul>
           <button onClick={this.deletePost.bind(this, post.id)}>Remove post</button>
         </li>
       );
@@ -53,8 +62,16 @@ class Post extends React.Component {
       <div>
         {renderPost}
         <br></br>
-        <textarea id="postinput" rows="7" cols="75">
-        </textarea>
+        Title:
+        <div className="title-textarea">
+          <textarea id="post-title" rows="1" cols="50">
+          </textarea>
+        </div>
+        Post:
+        <div className="post-textarea">
+          <textarea id="post-input" rows="7" cols="75">
+          </textarea>
+        </div>
         <button onClick={this.addPost}>Post!</button>
       </div>
     );
