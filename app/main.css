@@ -52,3 +52,12 @@ body {
   float: right;
   text-decoration: underline;
 }
+
+.comment .comment-author-time .comment-edit {
+  padding-right: 1.25em;
+  padding-top: 0.25em;
+  color: blue;
+
+  float: right;
+  text-decoration: underline;
+}

@@ -36,13 +36,56 @@ class Post extends React.Component {
     PostActions.delete(id);
   }
 
-  render() {
-    const posts = PostStore.posts;
-    const renderPost = [];
-    console.log(this.state.posts);
-    posts.forEach(post => {
-      renderPost.push(
-        <li className="post" key={post.id}>
+  startEditPost(id) {
+    PostActions.startEdit(id);
+  }
+
+  finishEditPost(id) {
+    const t = new Date();
+    const time = t.toString();
+    const postTitle = document.getElementById('edit-post-title').value;
+    const postInput = document.getElementById('edit-post-input').value;
+    PostActions.finishEdit(id, postTitle, postInput, time);
+  }
+
+  renderWhich(post) {
+    // in editing mode
+    if (post.editing === true) {
+      return (
+        <div>
+          Title:
+          <div className="title-textarea">
+            <textarea id="edit-post-title" rows="1" cols="50">
+            {post.title}
+            </textarea>
+          </div>
+          Post:
+          <div className="post-textarea">
+            <textarea id="edit-post-input" rows="7" cols="75">
+            {post.text}
+            </textarea>
+          </div>
+          <div className="post-author-time">
+            Author: Edwin, {post.time}
+          </div>
+          <ul>
+            <Comment
+              postId={post.id}
+            />
+          </ul>
+          <button
+            onClick={this.deletePost.bind(this, post.id)}
+          >Remove post</button>
+          <button
+            onClick={this.finishEditPost.bind(this, post.id)}
+          >Confirm post modification</button>
+        </div>
+      );
+    }
+    // before and after editing mode
+    else if (post.editing === false) {
+      return (
+        <div>
           <div className="post-title">{post.title}</div>
           <br></br>
           {post.text}
@@ -54,7 +97,25 @@ class Post extends React.Component {
               postId={post.id}
             />
           </ul>
-          <button onClick={this.deletePost.bind(this, post.id)}>Remove post</button>
+          <button
+            onClick={this.deletePost.bind(this, post.id)}
+          >Remove post</button>
+          <button
+            onClick={this.startEditPost.bind(this, post.id)}
+          >Modify post</button>
+        </div>
+      );
+    }
+  }
+
+  render() {
+    const posts = PostStore.posts;
+    const renderPost = [];
+    console.log(this.state.posts);
+    posts.forEach(post => {
+      renderPost.push(
+        <li className="post" key={post.id}>
+          {this.renderWhich(post)}
         </li>
       );
     });
