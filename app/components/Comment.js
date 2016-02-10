@@ -31,6 +31,8 @@ class Comment extends React.Component {
     const time = t.toString();
     const commentinput = document.getElementById(postId).value;
     CommentActions.create(postId, commentinput, time);
+    // erases the textarea
+    document.getElementById(postId).value = '';
   }
 
   deleteComment(id) {
@@ -47,6 +49,8 @@ class Comment extends React.Component {
     const time = t.toString();
     const commentInput = document.getElementById('edit-comment-input').value;
     CommentActions.finishEdit(id, commentInput, time);
+    // erases the textarea
+    document.getElementById('edit-comment-input').value = '';
   }
 
   renderWhich(comment, postId) {
@@ -144,18 +148,6 @@ class Comment extends React.Component {
     return (
       <div className="comment-box">
         {this.hideShowComments(postId, renderComments)}
-        {/* <div className="comment-hide-show" onClick={this.hideShowComments}>Hide comments</div>
-        {renderComments}
-        <div className="comment-textarea">
-          <br></br>
-          <div>Write your comment:</div>
-          <textarea id={postId} rows="3" cols="30">
-          </textarea>
-        </div>
-        <br></br>
-        <button className="add-comment" onClick={this.addComment.bind(this, postId)}>
-          Add comment
-        </button> */}
       </div>
     );
   }

@@ -30,6 +30,9 @@ class Post extends React.Component {
     const postTitle = document.getElementById('post-title').value;
     const postInput = document.getElementById('post-input').value;
     PostActions.create(postTitle, postInput, time);
+    // erases the textarea
+    document.getElementById('post-title').value = '';
+    document.getElementById('post-input').value = '';
   }
 
   deletePost(id) {
@@ -46,6 +49,9 @@ class Post extends React.Component {
     const postTitle = document.getElementById('edit-post-title').value;
     const postInput = document.getElementById('edit-post-input').value;
     PostActions.finishEdit(id, postTitle, postInput, time);
+    // erases the textarea
+    document.getElementById('edit-post-title').value = '';
+    document.getElementById('edit-post-input').value = '';
   }
 
   renderWhich(post) {
