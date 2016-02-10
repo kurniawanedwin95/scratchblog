@@ -7,8 +7,11 @@ class Comment extends React.Component {
     super(props);
     this.state = {
       comments: [],
+      hide: false,
     };
     this.storeChanged = this.storeChanged.bind(this);
+    this.hideComments = this.hideComments.bind(this);
+    this.showComments = this.showComments.bind(this);
   }
 
   componentDidMount() {
@@ -85,6 +88,44 @@ class Comment extends React.Component {
     }
   }
 
+  hideComments() {
+    this.setState({ hide: true });
+  }
+
+  showComments() {
+    this.setState({ hide: false });
+  }
+
+  hideShowComments(postId, renderComments) {
+    if (this.state.hide) {
+      return (
+        <div>
+          <div className="comment-hide-show" onClick={this.showComments}>Show comments</div>
+          <br></br>
+          Comments are hidden
+        </div>
+      );
+    }
+    else {
+      return (
+        <div>
+          <div className="comment-hide-show" onClick={this.hideComments}>Hide comments</div>
+          {renderComments}
+          <div className="comment-textarea">
+            <br></br>
+            <div>Write your comment:</div>
+            <textarea id={postId} rows="3" cols="30">
+            </textarea>
+          </div>
+          <br></br>
+          <button className="add-comment" onClick={this.addComment.bind(this, postId)}>
+            Add comment
+          </button>
+        </div>
+      );
+    }
+  }
+
   render() {
     const comments = CommentStore.comments;
     const renderComments = [];
@@ -102,6 +143,8 @@ class Comment extends React.Component {
     });
     return (
       <div className="comment-box">
+        {this.hideShowComments(postId, renderComments)}
+        {/* <div className="comment-hide-show" onClick={this.hideShowComments}>Hide comments</div>
         {renderComments}
         <div className="comment-textarea">
           <br></br>
@@ -112,7 +155,7 @@ class Comment extends React.Component {
         <br></br>
         <button className="add-comment" onClick={this.addComment.bind(this, postId)}>
           Add comment
-        </button>
+        </button> */}
       </div>
     );
   }
