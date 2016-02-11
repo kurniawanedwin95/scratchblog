@@ -2,6 +2,7 @@ import React from 'react';
 import PostActions from '../actions/PostActions.js';
 import PostStore from '../stores/PostStore.js';
 import Comment from './Comment.js';
+import { IndexLink } from 'react-router';
 
 class Post extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Post extends React.Component {
     const t = new Date();
     const time = t.toString();
     const postTitle = document.getElementById('post-title').value;
-    const postInput = document.getElementById('post-input').value;
+    let postInput = document.getElementById('post-input').value;
     PostActions.create(postTitle, postInput, time);
     // erases the textarea
     document.getElementById('post-title').value = '';
@@ -79,9 +80,15 @@ class Post extends React.Component {
               postId={post.id}
             />
           </ul>
+          <button><IndexLink to="/">
+            Return to home
+          </IndexLink></button>
           <button
             onClick={this.deletePost.bind(this, post.id)}
-          >Remove post</button>
+          ><IndexLink to="/">
+            Remove post
+            </IndexLink>
+          </button>
           <button
             onClick={this.finishEditPost.bind(this, post.id)}
           >Confirm post modification</button>
@@ -103,9 +110,15 @@ class Post extends React.Component {
               postId={post.id}
             />
           </ul>
+          <button><IndexLink to="/">
+            Return to home
+          </IndexLink></button>
           <button
             onClick={this.deletePost.bind(this, post.id)}
-          >Remove post</button>
+          ><IndexLink to="/">
+            Remove post
+            </IndexLink>
+          </button>
           <button
             onClick={this.startEditPost.bind(this, post.id)}
           >Modify post</button>
@@ -117,29 +130,18 @@ class Post extends React.Component {
   render() {
     const posts = PostStore.posts;
     const renderPost = [];
-    console.log(this.state.posts);
     posts.forEach(post => {
-      renderPost.push(
-        <li className="post" key={post.id}>
-          {this.renderWhich(post)}
-        </li>
-      );
+      if (post.id === this.props.params.id) {
+        renderPost.push(
+          <li className="post" key={post.id}>
+            {this.renderWhich(post)}
+          </li>
+        );
+      }
     });
     return (
       <div>
         {renderPost}
-        <br></br>
-        Title:
-        <div className="title-textarea">
-          <textarea id="post-title" rows="1" cols="50">
-          </textarea>
-        </div>
-        Post:
-        <div className="post-textarea">
-          <textarea id="post-input" rows="7" cols="75">
-          </textarea>
-        </div>
-        <button onClick={this.addPost}>Post!</button>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from './Post.js';
+//import Post from './Post.js';
 
 
 class App extends React.Component {
@@ -12,7 +12,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Welcome to ScratchBlog, a blog made from scratch!</h1>
-        <Post />
+        {/* <Post /> */}
+        {this.props.children}
       </div>
     );
   }

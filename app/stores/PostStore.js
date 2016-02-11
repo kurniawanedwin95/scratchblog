@@ -44,7 +44,7 @@ class PostStore extends BaseStore {
       time,
       editing,
     };
-    this.posts.push(post);
+    this.posts.unshift(post);
     return post;
   }
 

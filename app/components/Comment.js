@@ -40,7 +40,6 @@ class Comment extends React.Component {
   }
 
   startEditComment(id) {
-    console.log('boom');
     CommentActions.startEdit(id);
   }
 
@@ -51,6 +50,10 @@ class Comment extends React.Component {
     CommentActions.finishEdit(id, commentInput, time);
     // erases the textarea
     document.getElementById('edit-comment-input').value = '';
+  }
+
+  replyComment(id) {
+    console.log('start of a new era');
   }
 
   renderWhich(comment, postId) {
@@ -84,6 +87,9 @@ class Comment extends React.Component {
             <div className="comment-edit"
               onClick={this.startEditComment.bind(this, comment.id)}
             >Modify</div>
+            <div className="comment-reply"
+              onClick={this.replyComment.bind(this, comment.id)}
+            >Reply</div>
             Author: anonymous, {comment.time}
           </div>
           {comment.text}

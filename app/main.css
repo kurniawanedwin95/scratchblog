@@ -62,8 +62,40 @@ body {
   text-decoration: underline;
 }
 
+.comment .comment-author-time .comment-reply {
+  padding-right: 1.25em;
+  padding-top: 0.25em;
+  color: blue;
+
+  float: right;
+  text-decoration: underline;
+}
+
 .comment-box .comment-hide-show {
   font-size: 0.75em;
   color: blue;
   text-decoration: underline;
+}
+
+.summaries {
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+
+  background-color: #fdfdfd;
+  box-shadow: 0 0 0.3em 0.03.em rgba(0, 0, 0, 0.3);
+
+  display: block;
+}
+
+.summaries .summary-title {
+  font-size: 2.5em;
+}
+
+.summaries .summary-time {
+  font-size: 0.75em;
+}
+
+.read-more {
+  font-size: 0.75em;
+  float: right;
 }
