@@ -25,17 +25,6 @@ class Post extends React.Component {
     this.setState({ posts: PostStore.posts });
   }
 
-  addPost() {
-    const t = new Date();
-    const time = t.toString();
-    const postTitle = document.getElementById('post-title').value;
-    let postInput = document.getElementById('post-input').value;
-    PostActions.create(postTitle, postInput, time);
-    // erases the textarea
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-input').value = '';
-  }
-
   deletePost(id) {
     PostActions.delete(id);
   }
@@ -44,7 +33,7 @@ class Post extends React.Component {
     PostActions.startEdit(id);
   }
 
-  finishEditPost(id) {
+  finishEditPost(id, user) {
     const t = new Date();
     const time = t.toString();
     const postTitle = document.getElementById('edit-post-title').value;
@@ -56,8 +45,8 @@ class Post extends React.Component {
   }
 
   renderWhich(post) {
-    // in editing mode
     if (post.editing === true) {
+      // in editing mode
       return (
         <div>
           Title:
@@ -73,57 +62,83 @@ class Post extends React.Component {
             </textarea>
           </div>
           <div className="post-author-time">
-            Author: Edwin, {post.time}
+            Author: {post.author}, {post.time}
           </div>
           <ul>
             <Comment
               postId={post.id}
             />
           </ul>
-          <button><IndexLink to="/">
+          <button><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
             Return to home
           </IndexLink></button>
           <button
             onClick={this.deletePost.bind(this, post.id)}
-          ><IndexLink to="/">
+          ><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
             Remove post
             </IndexLink>
           </button>
           <button
-            onClick={this.finishEditPost.bind(this, post.id)}
+            onClick={this.finishEditPost.bind(this, post.id, this.props.params.user)}
           >Confirm post modification</button>
         </div>
       );
     }
-    // before and after editing mode
     else if (post.editing === false) {
-      return (
-        <div>
-          <div className="post-title">{post.title}</div>
-          <br></br>
-          {post.text}
-          <div className="post-author-time">
-            Author: Edwin, {post.time}
+      // before and after editing mode
+      if (this.props.params.user === post.author || this.props.params.user === 'admin') {
+        // if user is owner of the post
+        return (
+          <div>
+            <div className="post-title">{post.title}</div>
+            <br></br>
+            {post.text}
+            <div className="post-author-time">
+              Author: {post.author}, {post.time}
+            </div>
+            <ul>
+              <Comment
+                postId={post.id}
+                user={this.props.params.user}
+              />
+            </ul>
+            <button><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
+              Return to home
+            </IndexLink></button>
+            <button
+              onClick={this.deletePost.bind(this, post.id)}
+            ><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
+              Remove post
+              </IndexLink>
+            </button>
+            <button
+              onClick={this.startEditPost.bind(this, post.id)}
+            >Modify post</button>
           </div>
-          <ul>
-            <Comment
-              postId={post.id}
-            />
-          </ul>
-          <button><IndexLink to="/">
-            Return to home
-          </IndexLink></button>
-          <button
-            onClick={this.deletePost.bind(this, post.id)}
-          ><IndexLink to="/">
-            Remove post
-            </IndexLink>
-          </button>
-          <button
-            onClick={this.startEditPost.bind(this, post.id)}
-          >Modify post</button>
-        </div>
-      );
+        );
+      }
+      else {
+        // if user is not owner of the post
+        return (
+          <div>
+            <div className="post-title">{post.title}</div>
+            <br></br>
+            {post.text}
+            <div className="post-author-time">
+              Author: {post.author}, {post.time}
+            </div>
+            <ul>
+              <Comment
+                postId={post.id}
+                user={this.props.params.user}
+              />
+            </ul>
+            <button><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
+              Return to home
+            </IndexLink></button>
+          </div>
+        );
+      }
     }
   }
 

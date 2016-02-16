@@ -24,6 +24,8 @@ body {
 }
 
 .post .post-author-time {
+  padding-top: 1em;
+
   font-size: 0.75em;
   text-align: right;
 }
@@ -33,15 +35,7 @@ body {
   text-align: left;
 }
 
-/*.comment {
-  font-size: 0.75em;
-  color: blue;
-  text-decoration: underline;
-  text-align:left;
-}*/
-
 .comment .comment-author-time {
-  font-align: left;
   font-size: 0.75em;
 }
 
@@ -91,11 +85,46 @@ body {
   font-size: 2.5em;
 }
 
-.summaries .summary-time {
+.summaries .summary-author-time {
   font-size: 0.75em;
 }
 
 .read-more {
   font-size: 0.75em;
+  float: right;
+}
+
+.replies .reply-start {
+  font-size: 0.75em;
+  float: right;
+
+  color: blue;
+  text-decoration: underline;
+}
+
+.reply-author-time {
+  font-size: 0.75em;
+}
+
+.reply-author-time .reply-delete {
+  color: blue;
+
+  float: right;
+  text-decoration: underline;
+}
+
+.reply-author-time .reply-edit {
+  padding-right: 1.25em;
+  color: blue;
+
+  float: right;
+  text-decoration: underline;
+}
+
+.reply-add {
+  float: right;
+}
+
+.signup-button {
   float: right;
 }

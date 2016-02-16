@@ -4,8 +4,8 @@ import PostActions from '../actions/PostActions.js';
 import { Link } from 'react-router';
 
 class Summaries extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       posts: [],
     };
@@ -24,15 +24,21 @@ class Summaries extends React.Component {
     this.setState({ posts: PostStore.posts });
   }
 
-  addPost() {
-    const t = new Date();
-    const time = t.toString();
-    const postTitle = document.getElementById('post-title').value;
-    const postInput = document.getElementById('post-input').value;
-    PostActions.create(postTitle, postInput, time);
-    // erases the textarea
-    document.getElementById('post-title').value = '';
-    document.getElementById('post-input').value = '';
+  addPost(postAuthor) {
+    if(!postAuthor && postAuthor !== 'admin') {
+      alert('Please login to post');
+      return;
+    }
+    else {
+      const t = new Date();
+      const time = t.toString();
+      const postTitle = document.getElementById('post-title').value;
+      const postInput = document.getElementById('post-input').value;
+      PostActions.create(postAuthor, postTitle, postInput, time);
+      // erases the textarea
+      document.getElementById('post-title').value = '';
+      document.getElementById('post-input').value = '';
+    }
   }
 
   render() {
@@ -46,15 +52,15 @@ class Summaries extends React.Component {
               {post.title}
             </div>
             <br></br>
-            <div className="summary-time">
-              {post.time}
+            <div className="summary-author-time">
+              Author:{post.author}, {post.time}
             </div>
             <br></br>
             <div>
               {post.text.substring(0, 100)}
             </div>
             <div className="read-more">
-              <Link to={`/post/${post.id}`}>
+              <Link to={this.props.params.user ? `/${this.props.params.user}/post/${post.id}` : `/post/${post.id}`}>
                 Read more..
               </Link>
             </div>
@@ -76,7 +82,7 @@ class Summaries extends React.Component {
           <textarea id="post-input" rows="7" cols="75">
           </textarea>
         </div>
-        <button onClick={this.addPost}>Post!</button>
+        <button onClick={this.addPost.bind(this, this.props.params.user)}>Post!</button>
       </div>
     );
   }

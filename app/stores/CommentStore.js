@@ -12,7 +12,7 @@ class CommentStore extends BaseStore {
     switch (action.action) {
       case 'CREATE_COMMENT':
         console.log(action);
-        this.create(action.postId, action.id, action.text, action.time, action.editing);
+        this.create(action.postId, action.id, action.author, action.text, action.time, action.editing);
         this.emitChange();
         break;
       case 'DELETE_COMMENT':
@@ -35,10 +35,11 @@ class CommentStore extends BaseStore {
     }
   }
 
-  create(postId, id, text, time, editing) {
+  create(postId, id, author, text, time, editing) {
     const comment = {
       postId,
       id,
+      author,
       text,
       time,
       editing,
@@ -72,8 +73,6 @@ class CommentStore extends BaseStore {
       }
     });
   }
-
-
 }
 
 export default new CommentStore();

@@ -1,7 +1,5 @@
 import BaseStore from './BaseStore.js';
 
-// const CHANGE_EVENT = 'change';
-
 class PostStore extends BaseStore {
   constructor(props) {
     super(props);
@@ -13,7 +11,7 @@ class PostStore extends BaseStore {
     switch (action.action) {
       case 'CREATE_POST':
         console.log(action);
-        this.create(action.id, action.title, action.text, action.time, action.editing);
+        this.create(action.id, action.author, action.title, action.text, action.time, action.editing);
         this.emitChange();
         break;
       case 'DELETE_POST':
@@ -36,9 +34,10 @@ class PostStore extends BaseStore {
     }
   }
 
-  create(id, title, text, time, editing) {
+  create(id, author, title, text, time, editing) {
     const post = {
       id,
+      author,
       title,
       text,
       time,
