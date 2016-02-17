@@ -1,1 +1,1 @@
-web: npm start bundle.js
+web: webpack-dev-server
