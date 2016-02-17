@@ -1,11 +1,19 @@
 body {
+  margin: auto !important;
   background: orange;
-  font-family: sans-serif;
+  font-family: "Ubuntu";
+  text-align: center;
+}
+
+button {
+  font-family: "Ubuntu";
 }
 
 .post {
   float: center;
   margin-bottom: 0.5em;
+  width: 110em;
+  margin-left: 4em;
   padding: 0.5em;
 
   background-color: #fdfdfd;
@@ -35,12 +43,15 @@ body {
   text-align: left;
 }
 
+.post-modify-remove-return {
+  margin-bottom: 2em;
+}
+
 .comment .comment-author-time {
   font-size: 0.75em;
 }
 
 .comment .comment-author-time .comment-delete {
-  font-size: 1.25em;
   color: blue;
 
   float: right;
@@ -122,9 +133,5 @@ body {
 }
 
 .reply-add {
-  float: right;
-}
-
-.signup-button {
   float: right;
 }

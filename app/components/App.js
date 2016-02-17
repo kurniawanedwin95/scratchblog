@@ -141,12 +141,14 @@ class App extends React.Component {
               <br></br>
               <textarea id="login-input" rows="1" cols="30">
               </textarea>
-              <button className="login-confirm" onClick={this.loginToAccount.bind(this)}>
-                Login
-              </button>
-              <button className="login-cancel" onClick={this.hideLogin.bind(this)}>
-                Cancel
-              </button>
+              <div className="login-confirm-cancel">
+                <button className="login-confirm" onClick={this.loginToAccount.bind(this)}>
+                  Login
+                </button>
+                <button className="login-cancel" onClick={this.hideLogin.bind(this)}>
+                  Cancel
+                </button>
+              </div>
             </div>
           );
         }
@@ -170,7 +172,7 @@ class App extends React.Component {
     const accounts = AccountStore.accounts;
     console.log({ accounts });
     return (
-      <div>
+      <div className="container">
         {this.createAdmin()}
         <h1>Welcome to ScratchBlog, a blog made from scratch!</h1>
         {this.renderTextarea()}

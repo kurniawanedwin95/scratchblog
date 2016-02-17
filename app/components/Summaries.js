@@ -69,7 +69,7 @@ class Summaries extends React.Component {
       );
     });
     return (
-      <div>
+      <div className="col-sm-10">
         {renderSummaries}
         <br></br>
         Title:

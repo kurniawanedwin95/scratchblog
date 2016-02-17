@@ -87,11 +87,10 @@ class Comment extends React.Component {
             <div>Write your comment:</div>
             <textarea id={postId} rows="3" cols="50">
             </textarea>
-          </div>
-          <br></br>
-          <button className="add-comment" onClick={this.addComment.bind(this, postId, this.props.user)}>
-            Add comment
-          </button>
+            <button onClick={this.addComment.bind(this, postId, this.props.user)}>
+              Add comment
+            </button>
+          </div>          
         </div>
       );
     }
@@ -161,7 +160,7 @@ class Comment extends React.Component {
         renderComments.push(
           <li className="comment" key={comment.id}>
             {this.renderWhich(comment, postId)}
-            <ul>
+            <ul className="breadcrumb">
               <Reply
                 commentId={comment.id}
                 user={this.props.user}

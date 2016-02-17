@@ -102,18 +102,20 @@ class Post extends React.Component {
                 user={this.props.params.user}
               />
             </ul>
-            <button><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
-              Return to home
-            </IndexLink></button>
-            <button
-              onClick={this.deletePost.bind(this, post.id)}
-            ><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
-              Remove post
-              </IndexLink>
-            </button>
-            <button
-              onClick={this.startEditPost.bind(this, post.id)}
-            >Modify post</button>
+            <div className="post-modify-remove-return">
+              <button className="post-return"><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
+                Return to home
+              </IndexLink></button>
+              <button className="post-remove"
+                onClick={this.deletePost.bind(this, post.id)}
+              ><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
+                Remove post
+                </IndexLink>
+              </button>
+              <button className="post-modify"
+                onClick={this.startEditPost.bind(this, post.id)}
+              >Modify post</button>
+            </div>
           </div>
         );
       }
