@@ -5,6 +5,10 @@ body {
   text-align: center;
 }
 
+.header {
+  background-color: #ffcc00;
+}
+
 button {
   font-family: "Ubuntu";
 }

@@ -174,8 +174,10 @@ class App extends React.Component {
     return (
       <div className="container">
         {this.createAdmin()}
-        <h1>Welcome to ScratchBlog, a blog made from scratch!</h1>
-        {this.renderTextarea()}
+        <div className="header">
+          <h1>Welcome to ScratchBlog, a blog made from scratch!</h1>
+          {this.renderTextarea()}
+        </div>
         {this.props.children}
       </div>
     );

@@ -53,7 +53,7 @@ class Summaries extends React.Component {
             </div>
             <br></br>
             <div className="summary-author-time">
-              Author:{post.author}, {post.time}
+              Author: {post.author}, {post.time}
             </div>
             <br></br>
             <div>
