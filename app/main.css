@@ -1,16 +1,25 @@
 body {
   margin: auto !important;
-  background: orange;
+  background: #fdfdfd;
   font-family: "Ubuntu";
   text-align: center;
+  padding-top: 0em;
 }
 
 .header {
-  background-color: #ffcc00;
+  background-color: orange;
+  width: 110em;
+  margin-left: 4em;
+  padding: 0.5em;
 }
 
 button {
   font-family: "Ubuntu";
+}
+
+.summary {
+  background-color: #f2f2f2;
+  padding-bottom: 1.25em;
 }
 
 .post {
@@ -20,7 +29,7 @@ button {
   margin-left: 4em;
   padding: 0.5em;
 
-  background-color: #fdfdfd;
+  background-color: #f2f2f2;
   box-shadow: 0 0 0.3em 0.03.em rgba(0, 0, 0, 0.3);
 
   text-align: left;
@@ -49,6 +58,8 @@ button {
 
 .post-modify-remove-return {
   margin-bottom: 2em;
+  text-decoration: none;
+  color: black;
 }
 
 .comment .comment-author-time {

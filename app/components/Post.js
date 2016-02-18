@@ -157,7 +157,7 @@ class Post extends React.Component {
       }
     });
     return (
-      <div>
+      <div className="col-md-4">
         {renderPost}
       </div>
     );

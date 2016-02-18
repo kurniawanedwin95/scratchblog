@@ -25,7 +25,7 @@ class Summaries extends React.Component {
   }
 
   addPost(postAuthor) {
-    if(!postAuthor && postAuthor !== 'admin') {
+    if (!postAuthor && postAuthor !== 'admin') {
       alert('Please login to post');
       return;
     }
@@ -47,7 +47,7 @@ class Summaries extends React.Component {
     posts.forEach(post => {
       renderSummaries.push(
         <li className="summaries" key={post.id}>
-          <div>
+          <div className="summary">
             <div className="summary-title">
               {post.title}
             </div>
