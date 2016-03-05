@@ -103,9 +103,9 @@ class Post extends React.Component {
               />
             </ul>
             <div className="post-modify-remove-return">
-              <button className="post-return"><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
+              <IndexLink className="btn btn-primary" to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
                 Return to home
-              </IndexLink></button>
+              </IndexLink>
               <button className="post-remove"
                 onClick={this.deletePost.bind(this, post.id)}
               ><IndexLink to={this.props.params.user ? `/${this.props.params.user}` : "/"}>
@@ -157,8 +157,10 @@ class Post extends React.Component {
       }
     });
     return (
-      <div className="col-md-4">
-        {renderPost}
+      <div className="row">
+        <div className="col-md-8 col-md-offset-2">
+          {renderPost}
+        </div>
       </div>
     );
   }

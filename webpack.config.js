@@ -36,7 +36,7 @@ const common = {
   },
   plugins: [
     new HtmlwebpackPlugin({
-      template: 'node_modules/html-webpack-template/index.html',
+      template: 'dist/index.html',
       title: 'Scratch Blog',
       appMountId: 'app',
     }),
